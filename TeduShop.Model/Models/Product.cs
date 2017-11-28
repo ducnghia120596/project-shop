@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TeduShop.Model.Abstract;
 
 namespace TeduShop.Model.Models
 {
     [Table("Products")]
-    public class Product
+    public class Product : Auditable
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -25,8 +21,6 @@ namespace TeduShop.Model.Models
 
         [Required]
         public int CategoryID { set; get; }
-        [ForeignKey("CatagoryID")]
-        public virtual ProductCategory ProductCategory { get; set; }
 
         [MaxLength(256)]
         public string Image { set; get; }
@@ -41,13 +35,14 @@ namespace TeduShop.Model.Models
 
         [MaxLength(500)]
         public string Description { set; get; }
+
         public string Content { set; get; }
 
         public bool? HomeFlag { set; get; }
         public bool? HotFlag { set; get; }
         public int? ViewCount { set; get; }
 
-        public virtual IEnumerable<OrderDetail> OrderDetails { get; set; }
-
+        [ForeignKey("CategoryID")]
+        public virtual ProductCategory ProductCategory { set; get; }
     }
 }
