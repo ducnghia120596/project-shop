@@ -12,27 +12,23 @@ namespace TeduShop.Web.Api
     public class PostCategoryController : ApiControllerBase
     {
         IPostCategoryService _postCategoryService;
-        public PostCategoryController(IErrorService errorService,IPostCategoryService postCategoryService) : base(errorService)
+
+        public PostCategoryController(IErrorService errorService, IPostCategoryService postCategoryService) :
+            base(errorService)
         {
             this._postCategoryService = postCategoryService;
         }
+
         [Route("getall")]
         public HttpResponseMessage Get(HttpRequestMessage request)
         {
             return CreateHttpResponse(request, () =>
             {
-                HttpResponseMessage response = null;
-                if (ModelState.IsValid)
-                {
-                    request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-                }
-                else
-                {
-                    var listCategory = _postCategoryService.GetAll();
+                var listCategory = _postCategoryService.GetAll();
 
-                    response = request.CreateResponse(HttpStatusCode.OK, listCategory);
+                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, listCategory);
 
-                }
+
                 return response;
             });
         }

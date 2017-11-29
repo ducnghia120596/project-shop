@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeduShop.Data.Infastructure
 {
-    public class UnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly IDbFactory dbFactory;
         private TeduShopDbContext dbContext;
