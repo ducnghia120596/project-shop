@@ -30,6 +30,7 @@ namespace TeduShop.Data
         public DbSet<Slide> Slides { get; set; }
         public DbSet<SystemConfig> SystemConfigs { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Error> Errors { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder builder)
         {
